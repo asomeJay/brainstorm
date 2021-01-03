@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1> Idea </h1>
+    <div>
+        <form action="{% url 'main:write' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="idea">
+            <input type="submit" value="save">
+        </form>
+    </div>
+    {% if idea_list %}
+        <ul>
+        {% for idea in idea_list %}
+            <li> {{ idea.idea_text }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p> No Idea are available. </p>
+    {% endif %}
+
+</body>
+</html>
