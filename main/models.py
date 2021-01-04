@@ -8,4 +8,3 @@ class Idea(models.Model):
 
     def __str__(self):
         return self.idea_text
-
