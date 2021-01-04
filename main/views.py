@@ -3,15 +3,23 @@ from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
 
+import datetime
 from .models import Idea
+
 
 # Create your views here.
 def index(request):
     try:
-        idea_list = Idea.objects.all()
+        latest_idea = Idea.objects.latest('idea_date')
+        time_diff = (timezone.now() - latest_idea.idea_date)
+        day_diff_from_now = time_diff.days
+        hour_diff_from_now = (datetime.datetime.min + (timezone.now() - latest_idea.idea_date)).time().hour + \
+                             day_diff_from_now * 24
+
     except Idea.DoesNotExist:
         raise Http404("Idea does not exit")
-    return render(request, 'main/index.html', {'idea_list' : idea_list})
+
+    return render(request, 'main/index.html', {'latest_idea': latest_idea, 'time_diff': hour_diff_from_now})
 
 
 def write(request):
