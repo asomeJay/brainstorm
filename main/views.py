@@ -11,6 +11,10 @@ from .models import Idea
 def index(request):
     try:
         latest_idea = Idea.objects.latest('idea_date')
+        manufactured_idea_text = latest_idea.idea_text
+        if len(latest_idea.idea_text) >= 5:
+            manufactured_idea_text = latest_idea.idea_text[:5] + "..."
+
         time_diff = (timezone.now() - latest_idea.idea_date)
         day_diff_from_now = time_diff.days
         hour_diff_from_now = (datetime.datetime.min + (timezone.now() - latest_idea.idea_date)).time().hour + \
@@ -19,7 +23,7 @@ def index(request):
     except Idea.DoesNotExist:
         raise Http404("Idea does not exit")
 
-    return render(request, 'main/index.html', {'latest_idea': latest_idea, 'time_diff': hour_diff_from_now})
+    return render(request, 'main/index.html', {'latest_idea': manufactured_idea_text, 'time_diff': hour_diff_from_now})
 
 
 def write(request):

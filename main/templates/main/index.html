@@ -26,9 +26,9 @@
                 {% csrf_token %}
                 <div class="input-group " >
                     {% if time_diff == 0 %}
-                        <input type="text" name="idea" class="form-control" placeholder="방금 전에 '{{ latest_idea.idea_text }}'이(가) 입력됐어요." aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="text" name="idea" class="form-control" placeholder="방금 전에 '{{ latest_idea }}'이(가) 입력됐어요." aria-label="Recipient's username" aria-describedby="button-addon2">
                     {% elif time_diff <= 24 %}
-                        <input type="text" name="idea" class="form-control" placeholder="{{ time_diff }}시간 전에 '{{ latest_idea.idea_text }}'이(가) 입력됐어요." aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="text" name="idea" class="form-control" placeholder="{{ time_diff }}시간 전에 '{{ latest_idea }}'이(가) 입력됐어요." aria-label="Recipient's username" aria-describedby="button-addon2">
                     {% else %}
                         <input type="text" name="idea" class="form-control" placeholder="하루동안 입력된 아이디어가 없어요." aria-label="Recipient's username" aria-describedby="button-addon2">
                     {% endif %}
