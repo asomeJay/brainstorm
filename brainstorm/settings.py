@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import mimetypes
 from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '^8!nrbrtg4dr(a43du28*)4nxo)x+f2eo_^-y(d&c7#4(rlb7b'
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+mimetypes.add_type("text/css", ".css", True)
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
@@ -29,7 +31,7 @@ STATICFILES_DIRS = (
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['3.35.168.113']
 
 
 # Application definition
